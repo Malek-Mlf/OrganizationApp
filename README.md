@@ -1,1 +1,2 @@
 # InteractiveCalendar
+L'idée est de créer un calendrier interactif plus simple a utiliser que celui de l'ent ou on pourra marquer des évènement importants / ajouter et retirer des dates / implémenter son emploi du temps dans le calendrier, 
