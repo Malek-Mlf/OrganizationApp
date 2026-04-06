@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>StudyFlow</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="Cal.css">
+</head>
+
+<body>
+
+
+<div id="viewLogin">
+
+  <div class="auth-left">
+
+    <span class="brand-icon">📚</span>
+    <h1 class="brand-name">StudyFlow</h1>
+
+    <p class="brand-sub">Organise ton temps,<br>atteins tes objectifs.</p>
+
+    <div class="deco c1"></div>
+    <div class="deco c2"></div>
+  </div>
+
+  <div class="auth-right">
+
+    <div class="tabs">
+      <button class="tab active" data-tab="login">Connexion</button>
+      <button class="tab" data-tab="register">Inscription</button>
+      <button class="tab" data-tab="forgot">Mot de passe oublié</button>
+    </div>
+
+    <div id="loginForm" class="form">
+
+      <div class="field">
+
+        <label>Identifiant</label>
+
+        <input id="loginName" type="text" placeholder="ex: alex_dupont">
+      </div>
+
+      <div class="field">
+        <label>Mot de passe</label>
+
+        <input id="loginPass" type="password" placeholder="••••••••">
+      </div>
+
+      <p id="loginErr" class="err"></p>
+
+      <button id="btnLogin" class="btn-main">Se connecter →</button>
+    </div>
+
+    <div id="registerForm" class="form hidden">
+      <div class="field">
+        <label>Identifiant</label>
+        <input id="regName" type="text" placeholder="ex: alex_dupont">
+      </div>
+      <div class="field">
+        <label>Adresse e-mail</label>
+
+        <input id="regEmail" type="email" placeholder="ex: alex@gmail.com">
+      </div>
+      <div class="field">
+        <label>Mot de passe</label>
+        <input id="regPass" type="password" placeholder="••••••••">
+      </div>
+      <div class="field">
+        <label>Confirmer le mot de passe</label>
+        <input id="regPass2" type="password" placeholder="••••••••">
+      </div>
+      <p id="regErr" class="err"></p>
+      <button id="btnRegister" class="btn-main">Créer mon compte →</button>
+    </div>
+
+    <div id="forgotForm" class="form hidden">
+
+      <p class="form-hint">Renseigne ton identifiant et ton e-mail pour réinitialiser ton mot de passe.</p>
+
+      <div class="field">
+        <label>Identifiant</label>
+        <input id="forgotName" type="text" placeholder="ex: alex_dupont">
+      </div>
+      <div class="field">
+        <label>Adresse e-mail</label>
+        <input id="forgotEmail" type="email" placeholder="ex: alex@gmail.com">
+      </div>
+
+      <div id="forgotStep2" class="hidden">
+        <div class="field">
+          <label>Nouveau mot de passe</label>
+          <input id="newPass" type="password" placeholder="••••••••">
+        </div>
+        <div class="field">
+          <label>Confirmer</label>
+          <input id="newPass2" type="password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <p id="forgotErr" class="err"></p>
+      <button id="btnForgot" class="btn-main">Vérifier →</button>
+
+      <button id="btnReset" class="btn-main hidden" style="margin-top:8px">Enregistrer →</button>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="viewApp" class="hidden">
+
+  <nav>
+
+    <span class="logo">Study<em>Flow</em></span>
+
+    <ul>
+      <li class="active" data-page="home">Accueil</li>
+      <li data-page="tasks">Tâches</li>
+      <li data-page="schedule">Planning</li>
+      <li data-page="focus">Focus</li>
+    </ul>
+
+    <div class="nav-right">
+
+      <span id="navUser"></span>
+
+      <button id="btnProfile" title="Mon compte">⚙️</button>
+      <button id="btnLogout">Déconnexion</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <section id="home" class="page active">
+
+      <div class="dash-grid">
+
+        <div class="card dark">
+
+          <span id="homeEmoji" class="big-emoji">💪</span>
+          <h2 id="homeMsg">C'est parti !</h2>
+
+          <div class="prog-label">
+            <span>Tâches complétées</span>
+            <strong id="progPct">0%</strong>
+          </div>
+          <div class="prog-track">
+
+            <div id="progBar"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 class="card-h">🎯 À faire en priorité</h3>
+
+          <ul id="homeList" class="preview-list"></ul>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="tasks" class="page">
+      <div class="card">
+        <h2 class="page-h">Mes Tâches</h2>
+
+        <div class="task-form">
+
+          <input id="taskTitle" type="text" placeholder="Titre de la tâche *">
+          <input id="taskDesc"  type="text" placeholder="Description (optionnel)">
+
+          <input id="taskDue"   type="date" title="Date limite">
+          <button id="btnAdd">+ Ajouter</button>
+        </div>
+
+        <div class="filters">
+          <button class="pill active" data-filter="all">Toutes</button>
+          <button class="pill" data-filter="todo">À faire</button>
+          <button class="pill" data-filter="done">Terminées ✓</button>
+          <button class="pill" data-filter="late">En retard 🔴</button>
+        </div>
+
+        <ul id="taskList"></ul>
+      </div>
+    </section>
+
+    <section id="schedule" class="page">
+      <div class="card">
+
+        <div class="card-top">
+          <h2 class="page-h">Mon Planning</h2>
+          <div>
+            <button id="btnClearCal" class="btn-danger">🗑️ Vider</button>
+            <button id="btnEditCal"  class="btn-sec">⚙️ Configurer</button>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+
+          <table id="calTable">
+            <thead>
+              <tr id="calHead"></tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="focus" class="page">
+      <div class="card card-center">
+        <h2 class="page-h">Mode Focus</h2>
+        <p class="focus-sub">Éteins les distractions, concentre-toi.</p>
+
+        <div class="ring-wrap">
+          <svg viewBox="0 0 220 220">
+
+            <circle class="ring-bg" cx="110" cy="110" r="95"/>
+
+            <circle id="ring" cx="110" cy="110" r="95"/>
+          </svg>
+
+          <span id="timerDisplay">00:00:00</span>
+        </div>
+
+        <div class="time-inputs">
+          <div class="t-box">
+            <input id="hours" value="00">
+            <label>h</label>
+          </div>
+          <span class="sep">:</span>
+          <div class="t-box">
+            <input id="minutes" value="25">
+            <label>min</label>
+          </div>
+          <span class="sep">:</span>
+          <div class="t-box">
+            <input id="seconds" value="00">
+            <label>sec</label>
+          </div>
+        </div>
+
+        <div class="timer-btns">
+          <button id="btnReset2" class="btn-reset">↺ Reset</button>
+          <button id="btnStart"  class="btn-start">▶ Démarrer</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div id="modalProfile" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Mon compte</h3>
+
+    <div class="field">
+      <label>Identifiant</label>
+      <input id="profName" type="text">
+    </div>
+    <div class="field">
+      <label>E-mail</label>
+      <input id="profEmail" type="email">
+    </div>
+    <div class="field">
+
+      <label>Nouveau mot de passe <small>(laisser vide pour ne pas changer)</small></label>
+      <input id="profPass" type="password" placeholder="••••••••">
+    </div>
+
+    <p id="profMsg" class="err"></p>
+
+    <div class="modal-btns">
+      <button id="btnProfCancel" class="btn-cancel-m">Annuler</button>
+      <button id="btnProfSave"   class="btn-save-m">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalCal" class="modal-overlay">
+  <div class="modal-box">
+    <h3>Configuration du planning</h3>
+
+    <div class="modal-row">
+      <div class="field">
+        <label>🕒 Début</label>
+
+        <select id="calStart"></select>
+      </div>
+      <div class="field">
+        <label>🌙 Fin</label>
+        <select id="calEnd"></select>
+      </div>
+    </div>
+
+    <label class="modal-lbl">Jours affichés</label>
+
+    <div id="daysGrid"></div>
+
+    <div class="modal-btns">
+      <button id="btnCalCancel" class="btn-cancel-m">Annuler</button>
+      <button id="btnCalSave"   class="btn-save-m">Appliquer</button>
+    </div>
+  </div>
+</div>
+
+<script src="Cal.js"></script>
+
+    <nav>
+  <h1 class="logo">OrgApp</h1>
+  <ul>
+    <li class="active" data-page="home">Accueil</li>
+    <li data-page="todo">To-do</li>
+    <li data-page="schedule">Planning</li>
